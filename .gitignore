@@ -1,1 +1,14 @@
+# Node modules
 node_modules/
+
+# Logs
+logs/
+
+# dotenv env files
+.env
+
+# TypeScript build output
+dist/
+
+# Vitest coverage output
+coverage/

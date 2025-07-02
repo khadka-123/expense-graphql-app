@@ -1,38 +1,69 @@
-import mongoose from 'mongoose'
+import mongoose, { Document } from "mongoose";
 
-const TransactionSchema = new mongoose.Schema({
+/**
+ * Transaction interface for type safety
+ */
+export interface ITransaction extends Document {
+  userId: mongoose.Types.ObjectId;
+  amount: number;
+  type: string;
+  category: string;
+  reference?: string;
+  description: string;
+  date: Date;
+  status?: string;
+  comments?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
+const TransactionSchema = new mongoose.Schema<ITransaction>(
+  {
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
     },
     amount: {
-        type: Number,
-        required: [true, "Amount is required"]
+      type: Number,
+      required: [true, "Amount is required"],
     },
     type: {
-        type: String,
-        required: [true, 'Type is required']
+      type: String,
+      required: [true, "Type is required"],
     },
     category: {
-        type: String,
-        required: [true, "Category is required"]
+      type: String,
+      required: [true, "Category is required"],
     },
     reference: {
-        type: String,
-        default: ''
+      type: String,
+      default: "",
     },
     description: {
-        type: String,
-        required: [true, 'Description is required']
+      type: String,
+      required: [true, "Description is required"],
     },
     date: {
-        type: Date,
-        required: [true, 'Date is required']
-    }
-}, { timestamps: true })
+      type: Date,
+      required: [true, "Date is required"],
+    },
+    status: {
+      type: String,
+      enum: ["Active", "Inactive"],
+      default: "Active",
+    },
+    comments: {
+      type: String,
+      default: "",
+    },
+  },
+  { timestamps: true }
+);
 
-const Transaction = mongoose.model('Transaction', TransactionSchema);
+const Transaction = mongoose.model<ITransaction>(
+  "Transaction",
+  TransactionSchema
+);
 
-export default Transaction
+export default Transaction;

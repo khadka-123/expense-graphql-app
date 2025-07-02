@@ -1,18 +1,25 @@
-import { Request, Response, NextFunction } from 'express'
-import logger from '../utils/logger.js';
+import { Request, Response, NextFunction } from "express";
+import logger from "../utils/logger.js";
 
-const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
+/**
+ * Global error handling middleware.
+ */
+const errorHandler = (
+  err: any,
+  _req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
+  logger.error(err);
 
-    logger.error(err);
+  err.statusCode = err.statusCode ?? 500;
+  err.status = err.status ?? "error";
+  err.message = err.message ?? "Internal Server Error";
 
-    err.statusCode = err.statusCode || 500;
-    err.status = err.status || 'error';
-    err.message = err.message || 'Internal Server Error';
-
-    res.status(err.statusCode).json({
-        status: err.status,
-        message: err.message,
-    })
-}
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message,
+  });
+};
 
 export default errorHandler;
