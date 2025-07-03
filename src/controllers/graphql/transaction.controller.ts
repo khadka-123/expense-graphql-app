@@ -9,6 +9,16 @@ interface GetTransactionArgs {
 }
 
 /**
+ * Get transactions in a date range for a user
+ */
+interface GetTransactionsInRangeArgs {
+  userId: string;
+  from: Date;
+  to: Date;
+  type?: string;
+}
+
+/**
  * Shape of a new transaction
  */
 interface TransactionInput {
@@ -59,6 +69,33 @@ const getTransaction = async (
   } catch (err) {
     throw new AppError("Failed to get transactions", 500);
   }
+};
+
+const getTransactionsInRange = async (
+  _: unknown,
+  args: GetTransactionsInRangeArgs
+) => {
+  const { userId, from, to, type } = args;
+
+  const query: any = {
+    userId,
+    date: {
+      $gte: new Date(from),
+      $lte: new Date(to),
+    },
+  };
+
+  if (type && type !== "all") {
+    query.type = type;
+  }
+
+  const transactions = await transactionModel.find(query);
+
+  if (!transactions.length) {
+    throw new AppError("No transactions found for the given date range", 404);
+  }
+
+  return transactions;
 };
 
 /**
@@ -167,4 +204,5 @@ export {
   updateTransaction,
   softUpdateTransaction,
   deleteTransaction,
+  getTransactionsInRange,
 };

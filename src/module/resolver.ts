@@ -1,5 +1,6 @@
 import {
   getTransaction,
+  getTransactionsInRange,
   addTransaction,
   updateTransaction,
   softUpdateTransaction,
@@ -23,6 +24,7 @@ const resolvers = {
   Query: {
     getTransaction,
     getAccountInformation,
+    getTransactionsInRange,
   },
   Mutation: {
     addTransaction,

@@ -182,7 +182,7 @@ const getAccountInformation = async (
 ): Promise<{ name: string; email: string }> => {
   const { userId } = args;
 
-  const user = await userModel.findById({_id:userId});
+  const user = await userModel.findById(userId);
 
   if (!user) {
     throw new AppError("User not found", 404);
@@ -190,9 +190,15 @@ const getAccountInformation = async (
 
   return {
     name: user.name,
-    email: user.email
+    email: user.email,
   };
 };
 
-
-export { register, login, logout, resetPassword, changeEmail,getAccountInformation};
+export {
+  register,
+  login,
+  logout,
+  resetPassword,
+  changeEmail,
+  getAccountInformation,
+};

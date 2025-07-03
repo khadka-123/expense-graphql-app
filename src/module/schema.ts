@@ -52,19 +52,24 @@ const typeDefs = gql`
     newEmail: String!
   }
 
-
   type TransactionId {
     transactionId: ID!
   }
 
-  type AccountInfo{
-    name:String!
-    email:String!
+  type AccountInfo {
+    name: String!
+    email: String!
   }
 
   type Query {
     getTransaction(userId: ID!): [Transaction!]!
-    getAccountInformation(userId:ID!):AccountInfo!
+    getAccountInformation(userId: ID!): AccountInfo!
+    getTransactionsInRange(
+      userId: ID!
+      from: Date!
+      to: Date!
+      type: String
+    ): [Transaction!]!
   }
 
   type Mutation {

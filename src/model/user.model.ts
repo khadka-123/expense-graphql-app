@@ -9,6 +9,8 @@ export interface IUser extends Document {
   password: string;
   createdAt: Date;
   updatedAt: Date;
+  resetPasswordToken: string;
+  resetPasswordExpires: Date;
 }
 
 const userSchema = new mongoose.Schema<IUser>(
@@ -37,6 +39,8 @@ const userSchema = new mongoose.Schema<IUser>(
         "Password must contain at least one uppercase, one lowercase, one number, and one special character",
       ],
     },
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
   },
   { timestamps: true }
 );

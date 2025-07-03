@@ -1,12 +1,16 @@
-import express, { Request, Response,NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import PDFDocument from "pdfkit";
 import transactionModel from "../../model/transaction.model.js";
-import AppError from "../../error/app.error.js"; 
+import AppError from "../../error/app.error.js";
 
 /**
  * @returns a pdf with all the transactions of a user.
  */
-const downloadTransaction = async (req: Request, res: Response,next:NextFunction) => {
+const downloadTransaction = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const userId = req.params.userId as string;
 
@@ -44,7 +48,7 @@ const downloadTransaction = async (req: Request, res: Response,next:NextFunction
 
     doc.end();
   } catch (err) {
-    next(new AppError('Failed to download transaction',500));
+    next(new AppError("Failed to download transaction", 500));
   }
 };
 

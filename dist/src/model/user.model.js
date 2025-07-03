@@ -24,6 +24,8 @@ const userSchema = new mongoose.Schema({
             "Password must contain at least one uppercase, one lowercase, one number, and one special character",
         ],
     },
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
 }, { timestamps: true });
 const User = mongoose.model("User", userSchema);
 export default User;
