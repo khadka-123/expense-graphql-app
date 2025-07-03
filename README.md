@@ -20,7 +20,9 @@ tsconfig.json
 🚀 Features
 User Registration with password hashing
 User Login with JWT Authentication
+Password reset,change email,get account info,delete user
 Add, Update, Delete, and View Transactions
+download transaction in pdf
 GraphQL API with Apollo Server & Express
 MongoDB Database
 
