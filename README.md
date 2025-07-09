@@ -1,110 +1,87 @@
-📊 Expense Tracker API
-A simple full-stack GraphQL API for managing user authentication and expense transactions.
-Users can register, log in, and manage their transactions (add, update, delete, view).
+# Expense Tracker API
 
-📂 Project Structure
-src/
- ├── app.ts
- ├── config/
- ├── controllers/
- ├── error/
- ├── middleware/
- ├── model/
- ├── module/
- ├── utils/
-tests/
-.env
-tsconfig.json
+## Installation
 
+1. Clone the repository
+   ```
+   git clone https://github.com/khadka-123/expense-graphql-app.git
+   cd expense-graphql-app
+   ```
+2. Install dependencies
+   ```
+   npm install
+   ```
+3. Configure environment variables
+   Create a `.env` file in the root:
+   ```
+   PORT=4000
+   MONGO_URL=mongodb://localhost:27017/expenseDb
+   JWT_SECRET=yourSecretKey
+   ```
+4. Run MongoDB
+   Make sure your MongoDB server is running locally.
+5. Start the development server
+   ```
+   npm run dev
+   npm run server
+   ```
 
-🚀 Features
-User Registration with password hashing
-User Login with JWT Authentication
-Password reset,change email,get account info,delete user
-Add, Update, Delete, and View Transactions
-download transaction in pdf
-GraphQL API with Apollo Server & Express
-MongoDB Database
+## Usage
 
-📦 Tech Stack
-Language/Framework: TypeScript + Node.js + Express
-API: GraphQL (Apollo Server)
-Database: MongoDB
+Use Postman for API calls.
 
-🛠️ Installation
-1️⃣ Clone the repository
-git clone https://github.com/khadka-123/expense-graphql-app.git
-cd expense-graphql-app
+Query:
+    getTransaction,
+    getAccountInformation,
+    getTransactionsInRange,
 
-2️⃣ Install dependencies
-npm install
+Mutation: 
+    addTransaction,
+    updateTransaction,
+    softUpdateTransaction,
+    deleteTransaction,
+    register,
+    login,
+    logout,
+    resetPassword,
+    changeEmail,
 
-3️⃣ Configure environment variables
-Create a .env file in the root:
-PORT=4000
-MONGO_URL=mongodb://localhost:27017/expenseDb
-JWT_SECRET=yourSecretKey
+## API
 
-4️⃣ Run MongoDB
-Make sure your MongoDB server is running locally.
+The Expense Tracker API provides the following GraphQL queries and mutations:
 
-5️⃣ Start the development server
-npm run dev
-npm run server
+**Queries:**
+- `getTransaction`
+- `getAccountInformation`
+- `getTransactionsInRange`
 
-📌 GraphQL Endpoints
-Use the Postman for API call
+**Mutations:**
+- `addTransaction`
+- `updateTransaction`
+- `softUpdateTransaction`
+- `deleteTransaction`
+- `register`
+- `login`
+- `logout`
+- `resetPassword`
+- `changeEmail`
 
-📄Mutation
+## Contributing
 
-✅ Register User
-mutation {
-  register(input: {
-    name: "John Doe",
-    email: "john@example.com",
-    password: "MySecurePass123"
-  }) {
-    message
-  }
-}
+1. Fork the repository
+2. Create a new branch
+3. Commit your changes
+4. Push to your branch
+5. Create a Pull Request
 
-✅ Login User
-mutation {
-  login(input: {
-    email: "john@example.com",
-    password: "MySecurePass123"
-  }) {
-    userId
-    token
-  }
-}
+## License
 
-✅ Add Transaction
-mutation {
-  addTransaction(
-    userId: "USER_ID",
-    input: {
-      amount: 100.0,
-      type: "income",
-      category: "Salary",
-      reference: "Company XYZ",
-      description: "Monthly salary",
-      date: "2025-06-28"
-    }
-  ) {
-    message
-  }
-}
-
-📄Query
-✅ Get Transactions
-
-🤝 Contributing
-Fork the repository
-Create a new branch 
-Commit your changes
-Push to your branch 
-Create a Pull Request
-
-📄 License
 © 2025 Khadka Baniya
+
+## Testing
+
+The project includes a test suite that can be run using the following command:
+
+```
+npm run test
+```
